@@ -1,16 +1,17 @@
 import express from "express";
-const router = express.Router();
 import * as authController from "../controllers/authControllers.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
 
-// Public Routes
+const router = express.Router();
+
+// Public
 router.post("/registration", authController.register);
 router.post("/login", authController.login);
 
-// Protected Routes
-router.get("/profileRead", authMiddleware, authController.profileRead);
-router.get("/allProfiles", authMiddleware, authController.allProfiles);
-router.post("/profileUpdate", authMiddleware, authController.profileUpdate);
-router.get("/profileDelete", authMiddleware, authController.profileDelete);
+// Protected
+router.get("/profile", authMiddleware, authController.profileRead);
+router.get("/profiles", authMiddleware, authController.allProfiles);
+router.put("/profile", authMiddleware, authController.profileUpdate);
+router.delete("/profile", authMiddleware, authController.profileDelete);
 
 export default router;
